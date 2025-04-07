@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENT AI - Ear, Nose & Throat Analysis</title>
+  <style>
+    /* Enhanced ENT AI Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    
+    body {
+      background-color: #f4f9f7;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* Layout and containers */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    .sidebar {
+      flex: 1;
+      min-width: 300px;
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(37, 137, 111, 0.1);
+    }
+    
+    .main {
+      flex: 3;
+      min-width: 300px;
+    }
+    
+    /* Typography */
+    h1, h2, h3 {
+      color: #25896f;
+      margin-bottom: 15px;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    h2 {
+      font-size: 1.6rem;
+      border-bottom: 2px solid #e6f4f0;
+      padding-bottom: 10px;
+    }
+    
+    h3 {
+      font-size: 1.3rem;
+    }
+    
+    p {
+      margin-bottom: 20px;
+      color: #444;
+    }
+    
+    /* Header section */
+    .header {
+      background: linear-gradient(135deg, #25896f, #54c7a5);
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(37, 137, 111, 0.2);
+    }
+    
+    .header h1 {
+      color: white;
+      margin-bottom: 10px;
+      font-size: 2.8rem;
+    }
+    
+    .header p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      margin-bottom: 0;
+    }
+    
+    /* Button styles */
+    button, .button {
+      background-color: #25896f;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background-color 0.3s;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    button:hover, .button:hover {
+      background-color: #1c6954;
+    }
+    
+    /* Upload section */
+    .upload-box {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 12px rgba(37, 137, 111, 0.1);
+    }
+    
+    .file-upload {
+      margin: 20px 0;
+    }
+    
+    .file-upload label {
+      display: inline-block;
+      background-color: #e6f4f0;
+      color: #25896f;
+      padding: 12px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+    
+    .file-upload label:hover {
+      background-color: #d1ece4;
+    }
+    
+    .file-upload input[type="file"] {
+      display: none;
+    }
+    
+    /* Info section */
+    .info {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 12px rgba(37, 137, 111, 0.1);
+    }
+    
+    .info ul {
+      list-style-type: none;
+      padding-left: 10px;
+    }
+    
+    .info li {
+      margin: 12px 0;
+      padding-left: 15px;
+      position: relative;
+    }
+    
+    .info li::before {
+      content: "•";
+      color: #25896f;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    
+    .red {
+      color: #d32f2f;
+      font-weight: 600;
+    }
+    
+    .orange {
+      color: #f57c00;
+      font-weight: 600;
+    }
+    
+    .green {
+      color: #388e3c;
+      font-weight: 600;
+    }
+    
+    /* Chat box */
+    .chatbox {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .chatbox input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    
+    .chatbox input:focus {
+      border-color: #25896f;
+    }
+    
+    .chatbox button {
+      padding: 0 20px;
+      font-size: 1.2rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      
+      .sidebar, .main {
+        width: 100%;
+      }
+      
+      .header {
+        padding: 20px;
+      }
+      
+      .header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .upload-box, .info {
+        padding: 20px;
+      }
+    }
+
+    /* ENT-specific sections */
+    .assessment-tabs {
+      display: flex;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #e6f4f0;
+    }
+    
+    .assessment-tab {
+      padding: 10px 15px;
+      cursor: pointer;
+      background-color: #f4f9f7;
+      border: 1px solid #e6f4f0;
+      border-bottom: none;
+      border-radius: 5px 5px 0 0;
+      margin-right: 5px;
+      font-weight: 500;
+      color: #666;
+    }
+    
+    .assessment-tab.active {
+      background-color: white;
+      color: #25896f;
+      border-top: 2px solid #25896f;
+    }
+    
+    .area-selection {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .area-btn {
+      padding: 10px 20px;
+      background-color: #e6f4f0;
+      border: none;
+      border-radius: 50px;
+      color: #25896f;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .area-btn:hover, .area-btn.active {
+      background-color: #25896f;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>About ENT AI</h2>
+      <p>
+        ENT AI analyzes ear, nose, and throat images to detect abnormalities and potential diseases, providing detailed analysis for otolaryngologists, physicians, and healthcare providers.
+      </p>
+      <h3>Chat Controls</h3>
+      <button>➕ New Chat</button>
+      <button>☰ Clear All</button>
+    </aside>
+    
+    <main class="main">
+      <header class="header">
+        <h1>ENT AI</h1>
+        <p>Advanced Ear, Nose & Throat Analysis System</p>
+      </header>
+      
+      <section class="upload-box">
+        <h2>📤 Upload ENT Image</h2>
+        <div class="area-selection">
+          <button class="area-btn active">Ear</button>
+          <button class="area-btn">Nose</button>
+          <button class="area-btn">Throat</button>
+          <button class="area-btn">Sinus</button>
+        </div>
+        <div class="file-upload">
+          <label for="ent-upload">+ Click to Upload Image for Analysis</label>
+          <input type="file" id="ent-upload" accept="image/*">
+        </div>
+        <p><small>For best results, upload clear, well-lit images of the area of concern. Multiple angle images may improve analysis accuracy.</small></p>
+      </section>
+      
+      <section class="info">
+        <div class="assessment-tabs">
+          <div class="assessment-tab active">Findings</div>
+          <div class="assessment-tab">Recommendations</div>
+          <div class="assessment-tab">History</div>
+        </div>
+        <p>Upload an ENT image to get an AI-powered analysis of potential conditions.</p>
+        <ul>
+          <li><strong>Otitis Media (Ear Infection)</strong> – <span class="orange">Moderate probability</span></li>
+          <li><strong>Tympanic Membrane Perforation</strong> – <span class="green">Not detected</span></li>
+          <li><strong>Outer Ear Infection</strong> – <span class="red">High probability</span></li>
+          <li><strong>Normal Ear Canal</strong> – <span class="green">Not detected</span></li>
+        </ul>
+      </section>
+      
+      <div class="chatbox">
+        <input type="text" placeholder="Ask a question about your ENT condition...">
+        <button>&#10148;</button>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
